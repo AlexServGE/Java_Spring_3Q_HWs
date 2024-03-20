@@ -1,4 +1,4 @@
-package ru.gb.springbootlesson3.controllers;
+package ru.gb.springbootlesson3.dtos;
 
 import lombok.Data;
 

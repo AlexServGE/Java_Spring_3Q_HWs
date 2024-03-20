@@ -23,4 +23,12 @@ public class BookRepository {
                 .findFirst()
                 .orElse(null);
     }
+
+    public void deleteById(long id){
+        list.remove(this.findById(id));
+    }
+
+    public void addBook(Book newBook){
+        this.list.add(newBook);
+    }
 }
