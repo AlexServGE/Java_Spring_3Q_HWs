@@ -1,5 +1,6 @@
 package ru.gb.springbootlesson3.repository;
 
+import lombok.Data;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import ru.gb.springbootlesson3.entity.Book;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
+@Data
 public class BookRepository {
     private List<Book> list = new ArrayList<>();
 

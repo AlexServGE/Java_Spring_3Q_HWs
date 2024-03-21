@@ -13,10 +13,16 @@ public class Issue {
     private final long idBook;
     private final LocalDateTime time;
 
+    //        issue.getIdReader();
+//        issue.getIdBook();
+//        issue.getTime();
+
     public Issue(long idReader, long idBook){
         id = genId++;
         this.idBook = idBook;
         this.idReader = idReader;
         time = LocalDateTime.now();
     }
+
+
 }

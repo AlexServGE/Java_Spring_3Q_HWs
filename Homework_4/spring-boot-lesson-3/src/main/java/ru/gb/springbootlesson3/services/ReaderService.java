@@ -34,6 +34,10 @@ public class ReaderService {
     return readerRepository.findById(id);
   }
 
+  public List<Reader> findAll(){
+    return readerRepository.getList();
+  }
+
   public List<Issue> getIssueListByReaderId(long id) {
     return issueRepository.getIssueListByReaderId(id);
   }

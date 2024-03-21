@@ -11,6 +11,7 @@ import ru.gb.springbootlesson3.repository.BookRepository;
 import ru.gb.springbootlesson3.repository.IssueRepository;
 import ru.gb.springbootlesson3.repository.ReaderRepository;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Slf4j
@@ -26,6 +27,10 @@ public class BookService {
     }
 
     return bookRepository.findById(id);
+  }
+
+  public List<Book> findAll(){
+    return bookRepository.getList();
   }
 
   public void deleteBook(long id){
