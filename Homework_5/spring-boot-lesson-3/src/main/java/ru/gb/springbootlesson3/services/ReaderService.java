@@ -2,13 +2,12 @@ package ru.gb.springbootlesson3.services;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
-import ru.gb.springbootlesson3.dtos.BookRequest;
 import ru.gb.springbootlesson3.dtos.ReaderRequest;
-import ru.gb.springbootlesson3.entity.Book;
 import ru.gb.springbootlesson3.entity.Issue;
 import ru.gb.springbootlesson3.entity.Reader;
-import ru.gb.springbootlesson3.repository.BookRepository;
 import ru.gb.springbootlesson3.repository.IssueRepository;
 import ru.gb.springbootlesson3.repository.ReaderRepository;
 
@@ -25,6 +24,13 @@ public class ReaderService {
   private final ReaderRepository readerRepository;
   private final IssueRepository issueRepository;
 
+  @EventListener(ContextRefreshedEvent.class)
+  public void generateReaders() {
+    readerRepository.save(new Reader("Костя"));
+    readerRepository.save(new Reader("Василий"));
+    readerRepository.save(new Reader("Семен"));
+  }
+
   public Reader getReader(long id) {
     if (readerRepository.findById(id) == null) {
       log.info("Не удалось найти читателя с id " + id);
@@ -35,11 +41,11 @@ public class ReaderService {
   }
 
   public List<Reader> findAll(){
-    return readerRepository.getList();
+    return readerRepository.findAll();
   }
 
   public List<Issue> getIssueListByReaderId(long id) {
-    return issueRepository.getIssueListByReaderId(id);
+    return issueRepository.findIssuesByReaderId(id);
   }
 
   public void deleteReader(long id) {
@@ -52,7 +58,7 @@ public class ReaderService {
 
   public Reader addReader(ReaderRequest request) {
     Reader newReader = new Reader(request.getReaderName());
-    readerRepository.addReader(newReader);
+    readerRepository.save(newReader);
     return newReader;
   }
 }

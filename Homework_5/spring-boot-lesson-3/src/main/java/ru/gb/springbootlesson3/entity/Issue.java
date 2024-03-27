@@ -1,28 +1,30 @@
 package ru.gb.springbootlesson3.entity;
 
+import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "issues")
 @Data
+@NoArgsConstructor
 public class Issue {
-    private static long genId;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long id;
 
-    private final long id;
-    private final long idReader;
-    private final long idBook;
-    private final LocalDateTime time;
+  @Column
+  private long readerId;
+  @Column
+  private long bookId;
+  @Temporal(TemporalType.TIMESTAMP)
+  private LocalDateTime time;
 
-    //        issue.getIdReader();
-//        issue.getIdBook();
-//        issue.getTime();
-
-    public Issue(long idReader, long idBook){
-        id = genId++;
-        this.idBook = idBook;
-        this.idReader = idReader;
-        time = LocalDateTime.now();
-    }
-
-
+  public Issue(long readerId, long bookId) {
+    this.readerId = readerId;
+    this.bookId = bookId;
+    this.time = LocalDateTime.now();
+  }
 }

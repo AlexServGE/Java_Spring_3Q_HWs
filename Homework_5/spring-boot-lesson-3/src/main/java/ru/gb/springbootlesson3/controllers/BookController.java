@@ -27,8 +27,7 @@ import java.util.NoSuchElementException;
 @RequiredArgsConstructor
 public class BookController {
 
-  @Autowired
-  private BookService service;
+  private final BookService service;
 
   @GetMapping("/{id}")
   public ResponseEntity<Book> getBook(@PathVariable long id) {

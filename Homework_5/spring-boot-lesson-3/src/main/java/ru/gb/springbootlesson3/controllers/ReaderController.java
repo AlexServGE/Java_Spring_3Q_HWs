@@ -32,8 +32,7 @@ import java.util.NoSuchElementException;
 @RequiredArgsConstructor
 public class ReaderController {
 
-  @Autowired
-  private ReaderService service;
+  private final ReaderService service;
 
   @GetMapping("/{id}")
   public ResponseEntity<Reader> getReader(@PathVariable long id) {
