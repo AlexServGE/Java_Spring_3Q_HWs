@@ -1,5 +1,7 @@
 package ru.gb.springbootlesson3.controllers;
 
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,16 +32,12 @@ import java.util.stream.Stream;
  */
 @Controller
 @RequestMapping("/ui")
+@RequiredArgsConstructor
 public class UiController {
 
-  @Autowired
-  private BookService bookService;
-
-  @Autowired
-  private ReaderService readerService;
-
-  @Autowired
-  private IssueService issueService;
+  private final BookService bookService;
+  private final ReaderService readerService;
+  private final IssueService issueService;
 
   @GetMapping("/books")
   public String getBooks(Model model) {
@@ -55,17 +53,7 @@ public class UiController {
 
   @GetMapping("/issues")
   public String getIssues(Model model) {
-    ArrayList<ArrayList<String>> issuesWithDesciptions = issueService.findAll()
-            .stream()
-            .map(issue -> {
-              return Stream.of(String.valueOf(bookService.getBook(issue.getIdBook()))
-                              , String.valueOf(readerService.getReader(issue.getIdReader()))
-                              , issue.getTime().toString())
-                      .collect(Collectors.toCollection(ArrayList::new));
-            })
-            .collect(Collectors.toCollection(ArrayList::new));
-    ;
-    model.addAttribute("issues", issuesWithDesciptions);
+    model.addAttribute("issues", issueService.getIssueWithDescriptions());
     return "issues.html";
   }
 }
