@@ -34,7 +34,7 @@ public class CustomUserDetailService implements UserDetailsService {
   @EventListener(ContextRefreshedEvent.class)
   public void generateDbCredentialsUsers() {
     DbUser user1 = new DbUser();
-    user1.setLogin("paradox");
+    user1.setLogin("user");
     user1.setPassword("qwerty");
     user1.setRole("user");
     repository.save(user1);
