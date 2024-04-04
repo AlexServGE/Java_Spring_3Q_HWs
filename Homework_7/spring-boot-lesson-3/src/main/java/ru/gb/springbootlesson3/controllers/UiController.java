@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.gb.springbootlesson3.entity.Reader;
+import ru.gb.springbootlesson3.globalaspect.Timer;
 import ru.gb.springbootlesson3.services.BookService;
 import ru.gb.springbootlesson3.services.IssueService;
 import ru.gb.springbootlesson3.services.ReaderService;
@@ -40,18 +41,21 @@ public class UiController {
   private final IssueService issueService;
 
   @GetMapping("/books")
+  @Timer
   public String getBooks(Model model) {
     model.addAttribute("books", bookService.findAll());
     return "books.html";
   }
 
   @GetMapping("/readers")
+  @Timer
   public String getReader(Model model) {
     model.addAttribute("readers", readerService.findAll());
     return "readers.html";
   }
 
   @GetMapping("/issues")
+  @Timer
   public String getIssues(Model model) {
     model.addAttribute("issues", issueService.getIssueWithDescriptions());
     return "issues.html";
