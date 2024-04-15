@@ -2,13 +2,11 @@ package org.example;
 
 
 import org.example.TestOptionsClasses.JUnitSpringBootBase;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
-
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class IssueControllerTest extends JUnitSpringBootBase {
 
   @Autowired
@@ -18,7 +16,7 @@ public class IssueControllerTest extends JUnitSpringBootBase {
   private IssueRepository issueRepository;
 
 
-  @BeforeEach
+  @BeforeAll
   void generateIssues(){
     issueRepository.save(new Issue(1, 2));
     issueRepository.save(new Issue(2, 2));
