@@ -1,0 +1,18 @@
+server:
+  port: 8280
+spring:
+  application:
+    name: reader-service
+  datasource:
+    url: jdbc:h2:mem:test
+    username: kk
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
