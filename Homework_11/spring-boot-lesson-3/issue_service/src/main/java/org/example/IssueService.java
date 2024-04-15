@@ -2,12 +2,14 @@ package org.example;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.AspectIssueController.Count;
 import org.example.BookProvider.BookProvider;
 import org.example.ReaderProvider.ReaderProvider;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
+import javax.management.relation.RoleInfoNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -29,6 +31,7 @@ public class IssueService {
     issueRepository.save(new Issue(1, 2));
   }
 
+  @Count
   public Issue createIssue(IssueRequest request) {
     if (bookProvider.getBookById(request.getBookId()) == null) {
       log.info("Не удалось найти книгу с id " + request.getBookId());
@@ -38,7 +41,7 @@ public class IssueService {
       log.info("Не удалось найти читателя с id " + request.getReaderId());
       throw new NoSuchElementException("Не удалось найти читателя с id " + request.getReaderId());
     }
-    if (issueRepository.findIssueByReaderId(request.getReaderId()) != null) {
+    if ( issueRepository.findIssueByReaderId(request.getReaderId())!= null) {
       log.info("У данного читателя имеется книга на руках" + request.getReaderId());
       throw new RuntimeException("У данного читателя имеется книга на руках под номер book id" + issueRepository.findIssueByReaderId(request.getReaderId()));
     }
@@ -64,7 +67,7 @@ public class IssueService {
     return issueRepository.findIssuesByReaderId(id);
   }
 
-  public ArrayList<ArrayList<String>> getIssueWithDescriptions() {
+  public ArrayList<ArrayList<String>> getIssuesWithDescriptions() {
     return this.findAll()
             .stream()
             .map(issue -> {

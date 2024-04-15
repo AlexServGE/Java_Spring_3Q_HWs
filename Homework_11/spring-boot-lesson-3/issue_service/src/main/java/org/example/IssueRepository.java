@@ -9,7 +9,6 @@ import java.util.List;
 public interface IssueRepository extends JpaRepository<Issue, Long> {
 
   Issue findIssueById(long id);
-
   Issue findIssueByReaderId(long readerId);
   List<Issue> findIssuesByReaderId(long readerId);
 

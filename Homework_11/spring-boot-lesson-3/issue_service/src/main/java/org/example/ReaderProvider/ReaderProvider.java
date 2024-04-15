@@ -11,11 +11,11 @@ public class ReaderProvider {
 
   public ReaderProvider(ReactorLoadBalancerExchangeFilterFunction loadBalancerExchangeFilterFunction) {
     webClient = WebClient.builder()
-            .filter(loadBalancerExchangeFilterFunction)
+//            .filter(loadBalancerExchangeFilterFunction)
             .build();
   }
   public ReaderDto getReaderById(long id) {
-    String ipPortDnsReaderService = String.format("http://reader-service/reader/%d",id);
+    String ipPortDnsReaderService = String.format("http://localhost:8280/reader/%d",id);
     ReaderDto readerRequested = webClient.get()
             .uri(ipPortDnsReaderService)
             .retrieve()

@@ -11,11 +11,11 @@ public class BookProvider {
 
   public BookProvider(ReactorLoadBalancerExchangeFilterFunction loadBalancerExchangeFilterFunction) {
     webClient = WebClient.builder()
-            .filter(loadBalancerExchangeFilterFunction)
+//            .filter(loadBalancerExchangeFilterFunction)
             .build();
   }
   public BookDto getBookById(long id) {
-    String ipPortDnsBookService = String.format("http://book-service/book/%d",id);
+    String ipPortDnsBookService = String.format("http://localhost:8080/book/%d",id);
     BookDto bookRequested = webClient.get()
             .uri(ipPortDnsBookService)
             .retrieve()
