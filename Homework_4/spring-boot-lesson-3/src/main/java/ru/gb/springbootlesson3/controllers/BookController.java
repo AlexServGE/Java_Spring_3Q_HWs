@@ -37,7 +37,7 @@ public class BookController {
 
     try {
       return ResponseEntity.ok().body(service.getBook(id));
-    } catch (NoSuchElementException e){
+    } catch (NoSuchElementException e) {
       return ResponseEntity.notFound().build();
     }
   }
@@ -50,7 +50,7 @@ public class BookController {
     try {
       service.deleteBook(id);
       return ResponseEntity.ok().body("Книга успешно удалена");
-    } catch (NoSuchElementException e){
+    } catch (NoSuchElementException e) {
       return ResponseEntity.notFound().build();
     }
   }
@@ -59,12 +59,6 @@ public class BookController {
   public ResponseEntity<Book> createBook(@RequestBody BookRequest bookRequest) {
     log.info("Поступил запрос на созадние новой книги: bookName={}"
             , bookRequest.getBookName());
-
-    try {
-      return ResponseEntity.ok().body(service.createBook(bookRequest));
-    } catch (NoSuchElementException e){
-      return ResponseEntity.notFound().build();
-    }
+    return ResponseEntity.ok().body(service.createBook(bookRequest));
   }
-
 }
